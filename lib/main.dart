@@ -28,9 +28,12 @@ class _MyAppState extends State<MyApp> {
   final db = FirebaseFirestore.instance;
   final userPath =
       '/Company/kGCOpHgRyiIYLr4Fwuys/User/82Pn54ECfpMJov5SPDLn6JW4JMg1';
+  
+  
+  
   Future<void> updateAtWork() async {
-    await db.doc(userPath).update({
-      'atWork': atWork,
+    await db.doc('/Company/kGCOpHgRyiIYLr4Fwuys').update({
+      'qrId': prueba,
     });
     setState(() {
       atWork = !atWork;
@@ -49,6 +52,7 @@ class _MyAppState extends State<MyApp> {
 
     setState(() {
       prueba = getRandomString(5);
+      updateAtWork();
       print(prueba);
       // change state according to result of request
     });
@@ -60,7 +64,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     timer = Timer.periodic(
-        Duration(seconds: 2), (Timer t) => checkForNewSharedLists());
+        Duration(seconds: 60), (Timer t) => checkForNewSharedLists());
   }
 
   @override
@@ -79,7 +83,7 @@ class _MyAppState extends State<MyApp> {
             child: StreamBuilder(
           stream: db
               .doc(
-                  '/Company/kGCOpHgRyiIYLr4Fwuys/User/82Pn54ECfpMJov5SPDLn6JW4JMg1')
+                  '/Company/kGCOpHgRyiIYLr4Fwuys')
               .snapshots(),
           builder: (BuildContext context,
               AsyncSnapshot<DocumentSnapshot<Map<String, dynamic>>> snapshot) {
