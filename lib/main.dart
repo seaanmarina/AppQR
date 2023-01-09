@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:timeitapp/firebase_options.dart';
 import 'dart:math';
+import 'package:qr_flutter/qr_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,9 +46,10 @@ class _MyAppState extends State<MyApp> {
 
   void checkForNewSharedLists() {
     // do request here
-    
+
     setState(() {
-      print("hola");
+      prueba = getRandomString(5);
+      print(prueba);
       // change state according to result of request
     });
   }
@@ -58,7 +60,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     timer = Timer.periodic(
-        Duration(seconds: 60), (Timer t) => checkForNewSharedLists());
+        Duration(seconds: 2), (Timer t) => checkForNewSharedLists());
   }
 
   @override
@@ -95,18 +97,24 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  doc['name'],
+                  "QR para escanear",
                   style: const TextStyle(fontSize: 32),
                 ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    print(getRandomString(5));
-                    updateAtWork();
-                  },
-                  icon: Icon(Icons.start),
-                  label: Text("Start"),
+                QrImage(
+                  data: prueba,
+                  version: QrVersions.auto,
+                  size: 200.0,
                 ),
-                doc['atWork'] ? Text('true') : Text('false')
+
+                // ElevatedButton.icon(
+                //   onPressed: () {
+                //     print(getRandomString(5));
+                //     updateAtWork();
+                //   },
+                //   icon: Icon(Icons.start),
+                //   label: Text("Start"),
+                // ),
+                // doc['atWork'] ? Text('true') : Text('false')
               ],
             );
           },
