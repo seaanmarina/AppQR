@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String prueba = 'prueba';
+  String prueba = '';
   bool atWork = false;
   final db = FirebaseFirestore.instance;
   final userPath =
@@ -35,9 +35,7 @@ class _MyAppState extends State<MyApp> {
     await db.doc('/Company/kGCOpHgRyiIYLr4Fwuys').update({
       'qrId': prueba,
     });
-    setState(() {
-      atWork = !atWork;
-    });
+   
   }
 
   final _chars =
