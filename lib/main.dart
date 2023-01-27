@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     timer = Timer.periodic(
-        Duration(seconds: 60), (Timer t) => checkForNewSharedLists());
+        Duration(seconds: 5), (Timer t) => checkForNewSharedLists());
   }
 
   @override
